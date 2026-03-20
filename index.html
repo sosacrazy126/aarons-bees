@@ -33,6 +33,8 @@
     --text: #1A1208;
     --text-mid: #5C4A35;
     --text-light: #8C7A66;
+    --red-warm: #E85D5D;
+    --purple-soft: #8B7FC7;
     --shadow-sm: 0 1px 3px rgba(44,24,16,0.08);
     --shadow-md: 0 4px 12px rgba(44,24,16,0.1);
     --shadow-lg: 0 12px 40px rgba(44,24,16,0.15);
@@ -818,10 +820,88 @@
     border: 2px solid rgba(44,24,16,0.08);
   }
 
+  /* ========== SERVICE ICON SVGs ========== */
+  .service-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .service-card:hover .service-icon svg .accent-fill {
+    animation: iconPulse 0.3s ease;
+  }
+
+  @keyframes iconPulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+  }
+
+  /* ========== STEP VIGNETTES ========== */
+  .step-vignette {
+    width: 72px;
+    height: 72px;
+    min-width: 72px;
+    flex-shrink: 0;
+    position: relative;
+    margin-left: auto;
+    align-self: center;
+  }
+
+  .step-vignette svg {
+    width: 72px;
+    height: 72px;
+  }
+
+  .step-vignette-ring {
+    fill: none;
+    stroke: var(--honey);
+    stroke-width: 2;
+    stroke-dasharray: 204;
+    stroke-dashoffset: 204;
+    transition: stroke-dashoffset 0.01ms;
+  }
+
+  .step-vignette-inner {
+    opacity: 0;
+    transition: opacity 0.01ms;
+  }
+
+  .step-vignette.animated .step-vignette-ring {
+    animation: drawRing 0.6s ease forwards;
+  }
+
+  .step-vignette.animated .step-vignette-inner {
+    animation: fadeInUp 0.3s ease 0.3s forwards;
+  }
+
+  .step:nth-child(2) .step-vignette.animated .step-vignette-ring { animation-delay: 0.15s; }
+  .step:nth-child(2) .step-vignette.animated .step-vignette-inner { animation-delay: 0.45s; }
+  .step:nth-child(3) .step-vignette.animated .step-vignette-ring { animation-delay: 0.3s; }
+  .step:nth-child(3) .step-vignette.animated .step-vignette-inner { animation-delay: 0.6s; }
+  .step:nth-child(4) .step-vignette.animated .step-vignette-ring { animation-delay: 0.45s; }
+  .step:nth-child(4) .step-vignette.animated .step-vignette-inner { animation-delay: 0.75s; }
+
+  @keyframes drawRing {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* ========== REDUCED MOTION ========== */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   /* ========== ANIMATIONS ========== */
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ========== MOBILE: HIDE VIGNETTES ========== */
+  @media (max-width: 479px) {
+    .step-vignette { display: none; }
   }
 
   /* ========== DESKTOP ========== */
@@ -986,22 +1066,73 @@
 
   <div class="services-grid">
     <div class="service-card">
-      <div class="service-icon bee" role="img" aria-label="Bee removal service">🐝</div>
+      <div class="service-icon bee">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Bee removal service">
+          <!-- Honeycomb cell -->
+          <polygon class="accent-fill" points="16,4 22,8 22,16 16,20 10,16 10,8" fill="var(--honey)" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+          <!-- Bee body -->
+          <ellipse cx="16" cy="12" rx="4" ry="3" class="accent-fill" fill="var(--honey)" stroke="currentColor" stroke-width="1.5"/>
+          <!-- Bee stripes -->
+          <line x1="14" y1="11" x2="18" y2="11" stroke="currentColor" stroke-width="1"/>
+          <line x1="14" y1="13" x2="18" y2="13" stroke="currentColor" stroke-width="1"/>
+          <!-- Wings -->
+          <ellipse cx="13" cy="9.5" rx="2.5" ry="1.5" fill="none" stroke="currentColor" stroke-width="1" opacity="0.6"/>
+          <ellipse cx="19" cy="9.5" rx="2.5" ry="1.5" fill="none" stroke="currentColor" stroke-width="1" opacity="0.6"/>
+          <!-- Cupping hand -->
+          <path d="M8 22 C8 18, 12 17, 16 18 C20 17, 24 18, 24 22" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M8 22 C8 25, 12 27, 16 27 C20 27, 24 25, 24 22" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
       <h3>Live Bee Removal</h3>
       <p>Safe extraction and relocation of honey bee colonies from walls, roofs, trees, and structures. We never kill bees — we relocate them.</p>
     </div>
     <div class="service-card">
-      <div class="service-icon bug" role="img" aria-label="Bed bug treatment service">🛏️</div>
+      <div class="service-icon bug">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Bed bug heat treatment service">
+          <!-- Mattress -->
+          <rect x="6" y="18" width="20" height="8" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <line x1="6" y1="22" x2="26" y2="22" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+          <!-- Pillow -->
+          <rect x="8" y="16" width="8" height="4" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <!-- Heat waves -->
+          <path d="M12 14 C12 12, 14 12, 14 10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path class="accent-fill" d="M16 13 C16 11, 18 11, 18 9" stroke="var(--red-warm)" stroke-width="1.5" fill="none"/>
+          <path d="M20 14 C20 12, 22 12, 22 10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <!-- Heat glow dot -->
+          <circle cx="17" cy="6" r="1.5" class="accent-fill" fill="var(--red-warm)" stroke="none" opacity="0.5"/>
+        </svg>
+      </div>
       <h3>Bed Bug Heat Treatment</h3>
       <p>Chemical-free heat treatment that eliminates bed bugs at every life stage. Thorough and effective — one treatment does it.</p>
     </div>
     <div class="service-card">
-      <div class="service-icon shield" role="img" aria-label="Reinfestation prevention service">🛡️</div>
+      <div class="service-icon shield">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Reinfestation prevention service">
+          <!-- Shield -->
+          <path d="M16 3 L26 7 L26 16 C26 22, 22 26, 16 29 C10 26, 6 22, 6 16 L6 7 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <!-- Hex pattern inside shield -->
+          <polygon class="accent-fill" points="16,10 19,12 19,16 16,18 13,16 13,12" fill="var(--green-eco)" stroke="var(--green-eco)" stroke-width="1" opacity="0.25"/>
+          <!-- Checkmark -->
+          <path d="M12 15 L15 18 L21 12" stroke="var(--green-eco)" stroke-width="2" fill="none"/>
+        </svg>
+      </div>
       <h3>Reinfestation Prevention</h3>
       <p>Bee-proofing and sealing services to make sure colonies don't come back. Includes our bee insurance program for peace of mind.</p>
     </div>
     <div class="service-card">
-      <div class="service-icon rodent" role="img" aria-label="Animal removal service">🐿️</div>
+      <div class="service-icon rodent">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Animal removal service">
+          <!-- Small house -->
+          <path d="M6 17 L16 9 L26 17" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <rect x="9" y="17" width="14" height="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <rect x="14" y="21" width="4" height="6" stroke="currentColor" stroke-width="1" fill="none"/>
+          <!-- Squirrel silhouette (simple) -->
+          <circle cx="22" cy="10" r="2" class="accent-fill" fill="var(--purple-soft)" stroke="var(--purple-soft)" stroke-width="1" opacity="0.4"/>
+          <ellipse cx="22" cy="13" rx="1.5" ry="2" class="accent-fill" fill="var(--purple-soft)" stroke="var(--purple-soft)" stroke-width="1" opacity="0.4"/>
+          <!-- Tail -->
+          <path d="M23 11 C26 8, 27 10, 25 13" stroke="var(--purple-soft)" stroke-width="1.5" fill="none" opacity="0.6"/>
+        </svg>
+      </div>
       <h3>Small Animal &amp; Rodent Removal</h3>
       <p>Humane removal of squirrels, raccoons, opossums, and rodents. Non-lethal trapping and relocation services.</p>
     </div>
@@ -1021,12 +1152,37 @@
         <h3>You Call — We Listen</h3>
         <p>Tell us what's going on. How long have the bees been there? How high up? Anyone allergic? We'll ask the right questions to understand your situation.</p>
       </div>
+      <div class="step-vignette">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle class="step-vignette-ring" cx="36" cy="36" r="33"/>
+          <g class="step-vignette-inner">
+            <!-- Phone handset -->
+            <path d="M25 30 C25 26, 28 24, 30 26 L32 28 C33 29, 33 31, 31 32 L30 33 C30 33, 32 37, 36 37 L37 36 C38 34, 40 34, 41 35 L43 37 C45 39, 43 42, 39 42 C33 42, 25 36, 25 30Z" stroke="var(--bark)" stroke-width="1.5" fill="none"/>
+            <!-- Speech bubble with bee -->
+            <rect x="39" y="22" width="14" height="10" rx="3" stroke="var(--bark)" stroke-width="1.5" fill="none"/>
+            <polygon points="42,32 44,32 41,35" fill="var(--bark)" stroke="none"/>
+            <circle cx="46" cy="27" r="2" fill="var(--honey)" stroke="var(--bark)" stroke-width="0.8"/>
+          </g>
+        </svg>
+      </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-content">
         <h3>On-Site Assessment</h3>
         <p>Aaron comes out to evaluate in person. $175 service call covers the assessment — and that fee goes directly toward your removal if you move forward.</p>
+      </div>
+      <div class="step-vignette">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle class="step-vignette-ring" cx="36" cy="36" r="33"/>
+          <g class="step-vignette-inner">
+            <!-- Magnifying glass -->
+            <circle cx="33" cy="33" r="9" stroke="var(--bark)" stroke-width="1.5" fill="none"/>
+            <line x1="40" y1="40" x2="48" y2="48" stroke="var(--bark)" stroke-width="2" stroke-linecap="round"/>
+            <!-- Hexagon inside lens -->
+            <polygon points="33,27 37,29.5 37,34.5 33,37 29,34.5 29,29.5" fill="var(--honey)" stroke="var(--bark)" stroke-width="0.8" opacity="0.4"/>
+          </g>
+        </svg>
       </div>
     </div>
     <div class="step">
@@ -1035,12 +1191,41 @@
         <h3>Safe Removal &amp; Relocation</h3>
         <p>Using eco-friendly, non-lethal methods, we carefully extract the colony and relocate them where they can thrive. No chemicals, no killing.</p>
       </div>
+      <div class="step-vignette">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle class="step-vignette-ring" cx="36" cy="36" r="33"/>
+          <g class="step-vignette-inner">
+            <!-- Left hand -->
+            <path d="M22 38 C22 34, 26 30, 30 32 L33 34" stroke="var(--bark)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Right hand -->
+            <path d="M50 38 C50 34, 46 30, 42 32 L39 34" stroke="var(--bark)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Cupped shape below -->
+            <path d="M24 38 C24 44, 30 46, 36 46 C42 46, 48 44, 48 38" stroke="var(--bark)" stroke-width="1.5" fill="none"/>
+            <!-- Honeycomb piece -->
+            <polygon points="36,34 39,36 39,40 36,42 33,40 33,36" fill="var(--honey)" stroke="var(--bark)" stroke-width="0.8" opacity="0.5"/>
+          </g>
+        </svg>
+      </div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-content">
         <h3>Repair &amp; Prevention</h3>
         <p>We seal entry points, clean up honeycomb, and bee-proof the area so they don't come back. Optional bee insurance for ongoing protection.</p>
+      </div>
+      <div class="step-vignette">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle class="step-vignette-ring" cx="36" cy="36" r="33"/>
+          <g class="step-vignette-inner">
+            <!-- House -->
+            <path d="M24 38 L36 26 L48 38" stroke="var(--bark)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="27" y="38" width="18" height="12" stroke="var(--bark)" stroke-width="1.5" fill="none"/>
+            <!-- Door -->
+            <rect x="33" y="43" width="6" height="7" stroke="var(--bark)" stroke-width="1" fill="none"/>
+            <!-- Checkmark -->
+            <path d="M31 35 L35 39 L43 31" stroke="var(--green-eco)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>
       </div>
     </div>
   </div>
@@ -1211,7 +1396,11 @@ window.addEventListener('scroll', () => {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.style.animation = 'fadeInUp 0.5s ease-out forwards';
+      if (entry.target.classList.contains('step-vignette')) {
+        entry.target.classList.add('animated');
+      } else {
+        entry.target.style.animation = 'fadeInUp 0.5s ease-out forwards';
+      }
       observer.unobserve(entry.target);
     }
   });
@@ -1219,6 +1408,10 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.service-card, .step, .review-card, .pricing-card').forEach(el => {
   el.style.opacity = '0';
+  observer.observe(el);
+});
+
+document.querySelectorAll('.step-vignette').forEach(el => {
   observer.observe(el);
 });
 </script>
