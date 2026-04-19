@@ -150,6 +150,60 @@
     overflow: hidden;
   }
 
+  .hero-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .hero-illustration {
+    display: none;
+    flex: 0 0 380px;
+    will-change: transform;
+    transition: transform 0.1s linear;
+  }
+
+  /* Hex cells fade in on load */
+  @keyframes hexReveal {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .hex-cell {
+    opacity: 0;
+    animation: hexReveal 0.4s ease-out forwards;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  /* Bee flight along motion path */
+  @keyframes beefly {
+    from { offset-distance: 0%; }
+    to   { offset-distance: 100%; }
+  }
+  .bee {
+    offset-path: path("M 280 210 C 310 165 268 118 238 102 C 210 87 178 98 196 135 C 214 172 272 158 280 210");
+    animation: beefly 4s linear infinite;
+    offset-rotate: auto;
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hero-illustration {
+      display: block;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hex-cell { animation: none !important; opacity: 1 !important; }
+    .bee { animation: none !important; }
+    .hero-illustration { transform: none !important; transition: none !important; }
+  }
+
   .hero::before {
     content: '';
     position: absolute;
@@ -1050,29 +1104,121 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">🌿 100% Eco-Friendly &amp; Non-Lethal</div>
-  <h1>Los Angeles' Trusted <em>Live Bee Removal</em> Experts</h1>
-  <p class="hero-sub">Got bees? Don't panic — and don't spray. Aaron's team safely removes and relocates bee colonies so they can thrive, not die. Same-day service across Southern California.</p>
+  <div class="hero-body">
+    <div class="hero-badge">🌿 100% Eco-Friendly &amp; Non-Lethal</div>
+    <h1>Los Angeles' Trusted <em>Live Bee Removal</em> Experts</h1>
+    <p class="hero-sub">Got bees? Don't panic — and don't spray. Aaron's team safely removes and relocates bee colonies so they can thrive, not die. Same-day service across Southern California.</p>
 
-  <div class="hero-actions">
-    <a href="tel:8187454288" class="btn-primary">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      (818) 745-4288
-    </a>
-    <a href="#services" class="btn-secondary">
-      View Services ↓
-    </a>
-    <a href="sms:+18187454288?&body=Hi%20Aaron%2C%20I%20have%20a%20bee%20problem.%20Here%20is%20a%20photo%3A" class="btn-sms">
-      📷 Text a Photo for a Quick Quote
-    </a>
+    <div class="hero-actions">
+      <a href="tel:8187454288" class="btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (818) 745-4288
+      </a>
+      <a href="#services" class="btn-secondary">
+        View Services ↓
+      </a>
+      <a href="sms:+18187454288?&body=Hi%20Aaron%2C%20I%20have%20a%20bee%20problem.%20Here%20is%20a%20photo%3A" class="btn-sms">
+        📷 Text a Photo for a Quick Quote
+      </a>
+    </div>
+
+    <div class="hero-trust">
+      <div class="trust-stars">★★★★★</div>
+      <div class="trust-text">
+        <strong>59 photos &amp; 20+ reviews</strong> on Yelp<br>
+        Established 2008 · Licensed &amp; Insured
+      </div>
+    </div>
   </div>
 
-  <div class="hero-trust">
-    <div class="trust-stars">★★★★★</div>
-    <div class="trust-text">
-      <strong>59 photos &amp; 20+ reviews</strong> on Yelp<br>
-      Established 2008 · Licensed &amp; Insured
-    </div>
+  <div class="hero-illustration" aria-hidden="true">
+    <svg viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a beekeeper gently removing a honeybee hive from a tree" style="width:100%;height:auto;max-width:400px;">
+
+      <!-- Dotted flight trail -->
+      <path d="M 280 210 C 310 165 268 118 238 102 C 210 87 178 98 196 135 C 214 172 272 158 280 210" fill="none" stroke="#2C1810" stroke-dasharray="3 8" stroke-width="1.5" opacity="0.2"/>
+
+      <!-- Branch -->
+      <path d="M 10 340 C 80 270 155 210 220 148" fill="none" stroke="#2C1810" stroke-width="9" stroke-linecap="round"/>
+      <path d="M 220 148 C 258 116 300 96 344 88" fill="none" stroke="#2C1810" stroke-width="7" stroke-linecap="round"/>
+      <path d="M 160 210 C 140 190 125 175 118 158" fill="none" stroke="#2C1810" stroke-width="5" stroke-linecap="round"/>
+
+      <!-- Leaves -->
+      <ellipse cx="120" cy="150" rx="22" ry="9" fill="#4A7C59" opacity="0.85" transform="rotate(-45 120 150)"/>
+      <ellipse cx="108" cy="155" rx="18" ry="7" fill="#4A7C59" opacity="0.7" transform="rotate(-70 108 155)"/>
+      <ellipse cx="338" cy="80" rx="20" ry="8" fill="#4A7C59" opacity="0.85" transform="rotate(-20 338 80)"/>
+      <ellipse cx="350" cy="90" rx="16" ry="7" fill="#4A7C59" opacity="0.7" transform="rotate(15 350 90)"/>
+      <ellipse cx="310" cy="88" rx="16" ry="7" fill="#4A7C59" opacity="0.75" transform="rotate(-35 310 88)"/>
+
+      <!-- Honeycomb cluster (7 cells, staggered fade-in) -->
+      <!-- flat-top hexagon helper: points for cx,cy,r -->
+      <!-- hex at (215,115) -->
+      <g class="hex-cell" style="animation-delay:0s">
+        <polygon points="237,115 226,134 204,134 193,115 204,96 226,96" fill="#F5A623" stroke="#2C1810" stroke-width="1.5"/>
+      </g>
+      <!-- hex at (253,115) -->
+      <g class="hex-cell" style="animation-delay:0.15s">
+        <polygon points="275,115 264,134 242,134 231,115 242,96 264,96" fill="#FFCD6B" stroke="#2C1810" stroke-width="1.5"/>
+      </g>
+      <!-- hex at (234,80) -->
+      <g class="hex-cell" style="animation-delay:0.3s">
+        <polygon points="256,80 245,99 223,99 212,80 223,61 245,61" fill="#FFCD6B" stroke="#2C1810" stroke-width="1.5"/>
+      </g>
+      <!-- hex at (196,80) -->
+      <g class="hex-cell" style="animation-delay:0.45s">
+        <polygon points="218,80 207,99 185,99 174,80 185,61 207,61" fill="#F5A623" stroke="#2C1810" stroke-width="1.5"/>
+      </g>
+      <!-- hex at (177,115) -->
+      <g class="hex-cell" style="animation-delay:0.6s">
+        <polygon points="199,115 188,134 166,134 155,115 166,96 188,96" fill="#FFCD6B" stroke="#2C1810" stroke-width="1.5"/>
+      </g>
+      <!-- hex at (196,150) -->
+      <g class="hex-cell" style="animation-delay:0.75s">
+        <polygon points="218,150 207,169 185,169 174,150 185,131 207,131" fill="#F5A623" stroke="#2C1810" stroke-width="1.5"/>
+      </g>
+      <!-- hex at (234,150) -->
+      <g class="hex-cell" style="animation-delay:0.9s">
+        <polygon points="256,150 245,169 223,169 212,150 223,131 245,131" fill="#FFCD6B" stroke="#2C1810" stroke-width="1.5"/>
+      </g>
+
+      <!-- Beekeeper silhouette -->
+      <!-- Head -->
+      <circle cx="95" cy="235" r="17" fill="#2C1810"/>
+      <!-- Body -->
+      <ellipse cx="95" cy="278" rx="19" ry="27" fill="#2C1810"/>
+      <!-- Left arm raised toward hive -->
+      <path d="M 80 258 C 58 232 75 195 148 170" fill="none" stroke="#2C1810" stroke-width="10" stroke-linecap="round"/>
+      <!-- Right arm raised -->
+      <path d="M 110 258 C 135 235 155 210 172 165" fill="none" stroke="#2C1810" stroke-width="10" stroke-linecap="round"/>
+      <!-- Legs -->
+      <path d="M 85 302 L 78 335" fill="none" stroke="#2C1810" stroke-width="8" stroke-linecap="round"/>
+      <path d="M 105 302 L 112 335" fill="none" stroke="#2C1810" stroke-width="8" stroke-linecap="round"/>
+
+      <!-- Bee 1 -->
+      <g class="bee" style="animation-delay:0s">
+        <ellipse rx="7" ry="5" fill="#F5A623"/>
+        <rect x="-4" y="-5" width="2.5" height="10" fill="#2C1810" rx="1"/>
+        <rect x="0" y="-5" width="2.5" height="10" fill="#2C1810" rx="1"/>
+        <ellipse cx="-3" cy="-5" rx="5" ry="3" fill="white" opacity="0.7"/>
+        <ellipse cx="3" cy="-5" rx="5" ry="3" fill="white" opacity="0.7"/>
+      </g>
+      <!-- Bee 2 -->
+      <g class="bee" style="animation-delay:1.33s">
+        <ellipse rx="7" ry="5" fill="#F5A623"/>
+        <rect x="-4" y="-5" width="2.5" height="10" fill="#2C1810" rx="1"/>
+        <rect x="0" y="-5" width="2.5" height="10" fill="#2C1810" rx="1"/>
+        <ellipse cx="-3" cy="-5" rx="5" ry="3" fill="white" opacity="0.7"/>
+        <ellipse cx="3" cy="-5" rx="5" ry="3" fill="white" opacity="0.7"/>
+      </g>
+      <!-- Bee 3 -->
+      <g class="bee" style="animation-delay:2.66s">
+        <ellipse rx="7" ry="5" fill="#F5A623"/>
+        <rect x="-4" y="-5" width="2.5" height="10" fill="#2C1810" rx="1"/>
+        <rect x="0" y="-5" width="2.5" height="10" fill="#2C1810" rx="1"/>
+        <ellipse cx="-3" cy="-5" rx="5" ry="3" fill="white" opacity="0.7"/>
+        <ellipse cx="3" cy="-5" rx="5" ry="3" fill="white" opacity="0.7"/>
+      </g>
+
+    </svg>
   </div>
 </section>
 
@@ -1448,6 +1594,14 @@ document.querySelectorAll('.service-card, .step, .review-card, .pricing-card').f
 document.querySelectorAll('.step-vignette').forEach(el => {
   observer.observe(el);
 });
+
+// Hero illustration parallax
+window.addEventListener('scroll', () => {
+  const illus = document.querySelector('.hero-illustration');
+  if (illus && window.innerWidth >= 768) {
+    illus.style.transform = `translateY(${window.scrollY * 0.08}px)`;
+  }
+}, { passive: true });
 </script>
 
 </body>
